@@ -8,7 +8,5 @@ def main():
     data = parse(data)
     print(data)
 
-
-#
 if __name__ == '__main__':
     main()
