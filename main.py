@@ -1,10 +1,14 @@
-from utils import parse, sort_n, output_operations
+from utils import parse, sort_data, data_json
 
 file_name = 'operations.json'
 
 def main():
-    print(parse(sort_n(output_operations(file_name))))
+    data = data_json(file_name)
+    data = sort_data(data)
+    data = parse(data)
+    print(data)
 
 
+#
 if __name__ == '__main__':
     main()
