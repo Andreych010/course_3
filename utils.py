@@ -8,20 +8,30 @@ executed = 'EXECUTED'
 
 
 def data_json(file_name):
+    '''
+    :param file_name: файл с данными
+    :return: возвращает данные json
+    '''
     with open(file_name, encoding='utf-8') as f:
         response = f.read()
     return json.loads(response)
 
 
-#
 def sort_data(respons):
+    '''
+    сортирует операции по дате
+    :param respons: данные по операциям
+    :return: возвращает 5 отсортированых по дате операции
+    '''
     sort_ = [date for date in respons if 'date' in date]
     sort_.sort(key=operator.itemgetter('date'), reverse=True)
     return sort_[:5]
 
 
-
 def get_payment_type(payment: str):
+    '''
+возвращает замаскированный номер карты и счёта
+    '''
     if 'счет' in payment.lower():
         return f'{payment[:5]}**{payment[-4:]}'
     else:
@@ -32,8 +42,11 @@ def get_payment_type(payment: str):
         return payment_type
 
 
-
 def parse(res):
+    '''
+возвращает 5 последних операций, отсортированных executed
+    :param res: отсортированные по дате операции
+    '''
     for i in res:
         if len(i) > 0 and i['state'] == executed:
             datetime_str = i['date'].split('T')[0]
